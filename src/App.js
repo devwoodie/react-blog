@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import './Css/App.css';
+import './Css/Reset.css';
+import {useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let [title, setTitle] = useState(['Title1', 'Title2', 'Title3'])
+    return (
+        <div className="App">
+            <h1 className="logo">ReactBlog</h1>
+            <div className="list">
+                <p className="title">{ title[0] }</p>
+                <span className="text">2월 17일 발행</span>
+            </div>
+            <div className="list">
+                <p className="title">{ title[1] }</p>
+                <span className="text">2월 17일 발행</span>
+            </div>
+            <div className="list">
+                <p className="title">{ title[2] }</p>
+                <span className="text">2월 17일 발행</span>
+            </div>
+        </div>
+    );
 }
 
 export default App;
