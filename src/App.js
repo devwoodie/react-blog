@@ -3,7 +3,7 @@ import './Css/Reset.css';
 import {useState} from "react";
 
 function App() {
-    let [title, setTitle] = useState(['Title1', 'Title2', 'Title3'])
+    let [title, setTitle] = useState(['Title1', 'Title2', 'Title3']);
     return (
         <div className="App">
             <h1 className="logo">ReactBlog</h1>
