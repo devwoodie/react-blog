@@ -21,4 +21,6 @@
 .text{
   font-size: 14px;
   color: gray;
+  margin-right: 10px;
 }
+.like-btn{display: inline-block; margin: 0 5px 0 30px; cursor: pointer;}
