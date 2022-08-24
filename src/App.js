@@ -5,36 +5,53 @@ import './Css/Reset.css';
 import {useState} from "react";
 
 function App() {
-    let [mainTitle, setMainTitle] = useState(['Q Blog Title 1', 'F Blog Title 2', 'K Blog Title 3']);
-    let [like, setLike] = useState(0);
+    let [title, setTitle] = useState(['Y Main Title', 'D Main Title', 'W Main Title']);
+    let [like, setLike] = useState([0,0,0]);
+    let [modal, setModal] = useState(false);
 
     return (
         <div className="App">
-            <h1 className="logo">ReactBlog</h1>
-            <button type="button" onClick={() => {
-                let sortCopy = [... mainTitle];
-                sortCopy.sort();
-                setMainTitle(sortCopy);
+            <h1 className="logo">React Blog</h1>
+            <button type="button" className="alphabet" onClick={() => {
+                let copyTitle = [... title];
+                copyTitle.sort();
+                setTitle(copyTitle);
             }}>Alphabet Sort()</button>
-            <div className="list">
-                <p className="title">{ mainTitle[0] } <span className="like-btn" onClick={() => {setLike(like+1)}}>👍</span> { like }</p>
-                <span className="text">2월 17일 발행</span>
-                <button type="button" onClick={() => {
-                    let copy = [... mainTitle];
-                    copy[0] = 'T Change Title 1';
-                    setMainTitle(copy);
-                }}>Change Title</button>
-            </div>
-            <div className="list">
-                <p className="title">{ mainTitle[1] }</p>
-                <span className="text">2월 17일 발행</span>
-            </div>
-            <div className="list">
-                <p className="title">{ mainTitle[2] }</p>
-                <span className="text">2월 17일 발행</span>
-            </div>
+            {
+                title.map((title, i) => {
+                    return (
+                        <div className="list">
+                            <h4 className="title" onClick={() => {
+                                setModal(!modal);
+                            }}>{ title }</h4>
+                            <span className="text">11월 18일 발행</span>
+                            <div className="like-wrap">
+                                <span className="like-btn" onClick={() => {
+                                    let copyLike = [... like];
+                                    copyLike[i] = like[i] +1;
+                                    setLike(copyLike);
+                                }}>👍</span>
+                                <span className="like-num">{like[i]}</span>
+                            </div>
+                        </div>
+                    );
+                })
+            }
+
+            {
+                modal === true ? <Modal/> : null
+            }
         </div>
     );
 }
+const Modal = () => {
+    return(
+        <div className="modal">
+            <h4 className="title">제목</h4>
+            <span className="text">날짜</span>
+            <p className="content">내용</p>
+        </div>
+    );
+};
 
 export default App;
