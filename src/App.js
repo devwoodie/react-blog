@@ -54,7 +54,6 @@ function App() {
 const Modal = (props) => {
     return(
         <div className="modal">
-
             <h4 className="title">{props.title[0]}</h4>
             <span className="text">날짜</span>
             <p className="content">내용</p>
