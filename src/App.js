@@ -9,6 +9,12 @@ function App() {
     let [like, setLike] = useState([0,0,0]);
     let [modal, setModal] = useState(false);
 
+    const changeTitle = () => {
+        let copyTitle = [... title];
+        copyTitle[0] = 'R Main Title';
+        setTitle(copyTitle);
+    };
+
     return (
         <div className="App">
             <h1 className="logo">React Blog</h1>
@@ -39,17 +45,19 @@ function App() {
             }
 
             {
-                modal === true ? <Modal/> : null
+                modal === true ? <Modal title={title} changeTitle={changeTitle}/> : null
             }
         </div>
     );
 }
-const Modal = () => {
+
+const Modal = (props) => {
     return(
         <div className="modal">
-            <h4 className="title">제목</h4>
+            <h4 className="title">{props.title[0]}</h4>
             <span className="text">날짜</span>
             <p className="content">내용</p>
+            <button onClick={props.changeTitle}>Change Title</button>
         </div>
     );
 };
