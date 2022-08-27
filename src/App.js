@@ -7,9 +7,18 @@ import {useState} from "react";
 function App() {
     let [title, setTitle] = useState(['Y Main Title', 'D Main Title', 'W Main Title']);
     let [like, setLike] = useState([0,0,0]);
+    let [unlike, setUnlike] = useState([0,0,0]);
     let [modal, setModal] = useState(false);
     let [clickTit, setClickTit] = useState(0);
     let [addTit, setAddTit] = useState('');
+
+    const writeInput = document.querySelector('.input-typing');
+    const addTitle = () => {
+        let copyTit = [... title];
+        copyTit.unshift(addTit);
+        setTitle(copyTit);
+        setAddTit('');
+    };
 
     const changeTitle = () => {
         let copyTitle = [... title];
@@ -36,17 +45,18 @@ function App() {
                 }}
             />
             <button type="submit" onClick={() => {
-                let copyTit = [... title];
-                copyTit.unshift(addTit);
-                setTitle(copyTit);
+                writeInput.value = '';
+                {
+                    addTit == '' ? alert('내용을 입력해주세요') : addTitle();
+                }
             }}>입력</button>
             {
-                title.map((title, i) => {
+                title.map((titles, i) => {
                     return (
-                        <div className="list">
+                        <div className="list" key={i}>
                             <h4 className="title" onClick={() => {
                                 setModal(!modal); setClickTit(i);
-                            }}>{ title }</h4>
+                            }}>{ titles }</h4>
                             <span className="text">11월 18일 발행</span>
                             <div className="like-wrap">
                                 <span className="like-btn" onClick={() => {
@@ -55,9 +65,18 @@ function App() {
                                     setLike(copyLike);
                                 }}>👍</span>
                                 <span className="like-num">{like[i]}</span>
+                                {/*unlike*/}
+                                <span className="like-btn" onClick={() => {
+                                    let copyUnlike = [... unlike];
+                                    copyUnlike[i] = unlike[i] +1;
+                                    setUnlike(copyUnlike);
+                                }}>👎</span>
+                                <span className="like-num">{unlike[i]}</span>
                             </div>
                             <button type="button" className="del-btn" onClick={() => {
-
+                                let copyTit = [... title];
+                                copyTit.splice(i, 1);
+                                setTitle(copyTit);
                             }}>삭제</button>
                         </div>
                     );
