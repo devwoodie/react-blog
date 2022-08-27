@@ -8,6 +8,8 @@ function App() {
     let [title, setTitle] = useState(['Y Main Title', 'D Main Title', 'W Main Title']);
     let [like, setLike] = useState([0,0,0]);
     let [modal, setModal] = useState(false);
+    let [clickTit, setClickTit] = useState(0);
+    let [addTit, setAddTit] = useState('');
 
     const changeTitle = () => {
         let copyTitle = [... title];
@@ -18,17 +20,32 @@ function App() {
     return (
         <div className="App">
             <h1 className="logo">React Blog</h1>
+            {/*게시글 정렬 */}
             <button type="button" className="alphabet" onClick={() => {
                 let copyTitle = [... title];
                 copyTitle.sort();
                 setTitle(copyTitle);
-            }}>Alphabet Sort()</button>
+            }}>게시글 정렬</button>
+            {/*글 입력*/}
+            <input
+                type="text"
+                className="input-typing"
+                placeholder="글을 입력해주세요"
+                onChange={(e) => {
+                    setAddTit(e.target.value);
+                }}
+            />
+            <button type="submit" onClick={() => {
+                let copyTit = [... title];
+                copyTit.unshift(addTit);
+                setTitle(copyTit);
+            }}>입력</button>
             {
                 title.map((title, i) => {
                     return (
                         <div className="list">
                             <h4 className="title" onClick={() => {
-                                setModal(!modal);
+                                setModal(!modal); setClickTit(i);
                             }}>{ title }</h4>
                             <span className="text">11월 18일 발행</span>
                             <div className="like-wrap">
@@ -39,13 +56,17 @@ function App() {
                                 }}>👍</span>
                                 <span className="like-num">{like[i]}</span>
                             </div>
+                            <button type="button" className="del-btn" onClick={() => {
+
+                            }}>삭제</button>
                         </div>
                     );
                 })
             }
 
+
             {
-                modal === true ? <Modal title={title} changeTitle={changeTitle}/> : null
+                modal === true ? <Modal title={title} clickTit={clickTit} changeTitle={changeTitle}/> : null
             }
         </div>
     );
@@ -54,7 +75,7 @@ function App() {
 const Modal = (props) => {
     return(
         <div className="modal">
-            <h4 className="title">{props.title[0]}</h4>
+            <h4 className="title">{props.title[props.clickTit]}</h4>
             <span className="text">날짜</span>
             <p className="content">내용</p>
             <button onClick={props.changeTitle}>Change Title</button>

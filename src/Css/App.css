@@ -46,3 +46,11 @@
 .content{
   padding: 10px 0;
 }
+.input-typing{
+  width: 150px;
+  padding: 1px 5px;
+}
+.del-btn{
+  display: inline-block;
+  margin-left: 10px;
+}
