@@ -24,6 +24,7 @@ function App() {
         setTitle(copyTit);
         setAddTit('');
         writeInput.value = '';
+
     };
 
     return (
