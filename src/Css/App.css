@@ -64,3 +64,11 @@
   display: inline-block;
   margin-left: 10px;
 }
+.cls-btn{
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-weight: bold;
+}

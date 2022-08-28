@@ -90,10 +90,8 @@ function App() {
                     );
                 })
             }
-
-
             {
-                modal === true ? <Modal title={title} nowDate={nowDate} clickTit={clickTit}/> : null
+                modal === true ? <Modal title={title} modal={setModal} nowDate={nowDate} clickTit={clickTit}/> : null
             }
         </div>
     );
@@ -106,6 +104,10 @@ const Modal = (props) => {
                 <h4 className="title">{props.title[props.clickTit]}</h4>
                 <span className="text">{props.nowDate[props.clickTit]}</span>
                 <p className="content">내용</p>
+                <span className="cls-btn" onClick={() => {
+                    props.modal(false);
+                }
+                }>X</span>
             </div>
         </div>
     );
