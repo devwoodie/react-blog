@@ -13,17 +13,17 @@ function App() {
     let [addTit, setAddTit] = useState('');
 
     const writeInput = document.querySelector('.input-typing');
+    const date = new Date();
+    let nowDateTime = date.toLocaleString('ko-kr');
+    let [nowDate, setNowDate] = useState([nowDateTime, nowDateTime, nowDateTime]);
+
+
     const addTitle = () => {
         let copyTit = [... title];
         copyTit.unshift(addTit);
         setTitle(copyTit);
         setAddTit('');
-    };
-
-    const changeTitle = () => {
-        let copyTitle = [... title];
-        copyTitle[0] = 'R Main Title';
-        setTitle(copyTitle);
+        writeInput.value = '';
     };
 
     return (
@@ -45,10 +45,18 @@ function App() {
                 }}
             />
             <button type="submit" onClick={() => {
-                writeInput.value = '';
                 {
-                    addTit == '' ? alert('내용을 입력해주세요') : addTitle();
+                    addTit === '' ? alert('내용을 입력해주세요') : addTitle();
                 }
+                let copy1 = [... like];
+                copy1.unshift(0);
+                setLike(copy1);
+                let copy2 = [... unlike];
+                copy2.unshift(0);
+                setUnlike(copy2);
+                let copy3 = [... nowDate];
+                copy3.unshift(nowDateTime);
+                setNowDate(copy3);
             }}>입력</button>
             {
                 title.map((titles, i) => {
@@ -57,7 +65,7 @@ function App() {
                             <h4 className="title" onClick={() => {
                                 setModal(!modal); setClickTit(i);
                             }}>{ titles }</h4>
-                            <span className="text">11월 18일 발행</span>
+                            <span className="text">{nowDate[i]}</span>
                             <div className="like-wrap">
                                 <span className="like-btn" onClick={() => {
                                     let copyLike = [... like];
@@ -85,7 +93,7 @@ function App() {
 
 
             {
-                modal === true ? <Modal title={title} clickTit={clickTit} changeTitle={changeTitle}/> : null
+                modal === true ? <Modal title={title} nowDate={nowDate} clickTit={clickTit}/> : null
             }
         </div>
     );
@@ -94,10 +102,11 @@ function App() {
 const Modal = (props) => {
     return(
         <div className="modal">
-            <h4 className="title">{props.title[props.clickTit]}</h4>
-            <span className="text">날짜</span>
-            <p className="content">내용</p>
-            <button onClick={props.changeTitle}>Change Title</button>
+            <div className="modal-wrap">
+                <h4 className="title">{props.title[props.clickTit]}</h4>
+                <span className="text">{props.nowDate[props.clickTit]}</span>
+                <p className="content">내용</p>
+            </div>
         </div>
     );
 };
